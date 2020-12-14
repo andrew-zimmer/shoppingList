@@ -1,51 +1,38 @@
+import 'react-native-gesture-handler'
 import React, {useState} from 'react'
-import {View, FlatList, StyleSheet, Alert} from 'react-native'
 
-import uuid from 'uuid-random'
+//redux and thunk
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 
-import Header from './components/Header'
-import ListItem from './components/ListItem'
-import AddItem from './components/AddItem'
+//reducer
+import Reducers from './src/reducers/index'
+
+//page navigation
+import {NavigationContainer} from '@react-navigation/native'
+import {createStackNavigator} from '@react-navigation/stack'
+
+//app components
+import HomePage from './src/containers/HomePage'
+import ShoppingList from './src/containers/ShoppingList'
+
+import Header from './src/components/HomePage/Header'
+
+const Stack = createStackNavigator()
 
 export default function App() {
 
-  const [items, setItems] = useState([])
-
-  const deleteItem = (id) => {
-    setItems(prevItems => {
-      return (
-        prevItems.filter((item) => item.id != id)
-      )
-    })
-  }
-
-  const addItem = (text) => {
-    if (!text){
-      Alert.alert('Error', 'Please enter an item')
-    }else {
-      setItems(prevItems => {
-        return (
-          [ {text, id: uuid()}, ...prevItems]
-        )
-      })
-    }
-  }
+  const store = createStore(Reducers, applyMiddleware(thunk))
 
   return (
-    <View style={styles.container}>
-      <Header title='Shopping List'/>
-      <AddItem addItem={addItem} />
-      <FlatList
-        data={items}
-        renderItem={({item}) => <ListItem item={item} deleteItem={deleteItem} />}/>
-    </View>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{header: (props) => <Header {...props} />}} >
+          <Stack.Screen name='Home' component={HomePage}  />
+          <Stack.Screen name='Shopping List' component={ShoppingList} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
 }
-
-const styles =  StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 60
-  },
-
-})

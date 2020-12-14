@@ -1,11 +1,16 @@
 import React from 'react'
 
+//react-native components
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
+
+// fontawesome icon component
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 
-export default function ListItem({item, deleteItem}) {
+
+export default function ListItem({item}) {
     return (
-        <TouchableOpacity style={styles.listItem}>
+        <TouchableOpacity
+            style={styles.listItem}>
             <View style={styles.listItemView}>
                 <Text style={styles.listItemText}>
                     {item.text}

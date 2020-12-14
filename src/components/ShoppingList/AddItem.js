@@ -7,15 +7,20 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome'
 
 export default function AddItem({addItem}) {
 
-    const [text, setText] =useState('')
+    const [text, setText] = useState('')
 
     const onChange = (value) => setText(value)
+
+    const handlePress = () => {
+        addItem(text)
+        setText('')
+    }
 
     return (
         <View>
             <TextInput placeholder="Add Item..." value={text} onChangeText={onChange} />
             <TouchableOpacity style={styles.btn}>
-                <Text style={styles.btnText} onPress={() => addItem(text)} >
+                <Text style={styles.btnText} onPress={handlePress} >
                     <Icon name='plus' size={20} />
                     Add Item
                 </Text>
