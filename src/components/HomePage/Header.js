@@ -10,6 +10,9 @@ function CustomNavigationBar({ navigation, previous, loggedIn }) {
 
     const handleClick = () => {
         console.log('clicky clack')
+        if (!loggedIn){
+            navigation.navigate('Log In')
+        }
     }
 
   return (

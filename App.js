@@ -16,6 +16,7 @@ import {createStackNavigator} from '@react-navigation/stack'
 //app components
 import HomePage from './src/containers/HomePage'
 import ShoppingList from './src/containers/ShoppingList'
+import LogIn from './src/components/LogIn/LogIn'
 
 import Header from './src/components/HomePage/Header'
 
@@ -31,6 +32,7 @@ export default function App() {
         <Stack.Navigator screenOptions={{header: (props) => <Header {...props} />}} >
           <Stack.Screen name='Home' component={HomePage}  />
           <Stack.Screen name='Shopping List' component={ShoppingList} />
+          <Stack.Screen name='Log In' component={LogIn} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
