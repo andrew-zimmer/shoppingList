@@ -4,7 +4,7 @@ import { View, Platform, Text } from 'react-native'
 
 import { TextInput, Subheading, Checkbox, Button } from 'react-native-paper'
 
-export default function LogIn() {
+export default function LogIn({navigation}) {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -24,6 +24,10 @@ export default function LogIn() {
          })
      }
 
+     const handlePressNotAMember = () => {
+         navigation.navigate('Sign Up')
+     }
+
     return (
         <View>
             <View>
@@ -36,6 +40,7 @@ export default function LogIn() {
                     mode='outlined'
                     style={{borderColor: 'black'}}
                     onChangeText={handleUsername}
+                    textContentType='username'
                     theme={{colors: {primary: 'aqua'}}} />
             </View>
             <View>
@@ -58,7 +63,7 @@ export default function LogIn() {
                 <Button icon='login' mode='contained' style={{backgroundColor: 'aqua'}}> Log In</Button>
             </View>
             <View>
-                <Text onPress={() => console.log('clicky clack')}>
+                <Text onPress={handlePressNotAMember}>
                     Not a member?
                 </Text>
             </View>

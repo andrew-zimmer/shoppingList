@@ -17,6 +17,7 @@ import {createStackNavigator} from '@react-navigation/stack'
 import HomePage from './src/containers/HomePage'
 import ShoppingList from './src/containers/ShoppingList'
 import LogIn from './src/components/LogIn/LogIn'
+import SignUp from './src/components/SignUp/SignUp'
 
 import Header from './src/components/HomePage/Header'
 
@@ -33,6 +34,7 @@ export default function App() {
           <Stack.Screen name='Home' component={HomePage}  />
           <Stack.Screen name='Shopping List' component={ShoppingList} />
           <Stack.Screen name='Log In' component={LogIn} />
+          <Stack.Screen name='Sign Up' component={SignUp} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
