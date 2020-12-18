@@ -4,17 +4,19 @@ import { Appbar } from 'react-native-paper';
 
 import {connect} from 'react-redux'
 
-function CustomNavigationBar({ navigation, previous, loggedIn }) {
+import {signOut} from '../../actions/UserActions'
+
+function CustomNavigationBar({ navigation, previous, loggedIn, signOut, id }) {
 
     const logIcon = loggedIn ? 'logout' : 'login'
 
     const handleClick = () => {
-        console.log('clicky clack')
         if (!loggedIn){
             navigation.navigate('Log In')
+        } else {
+            signOut(id)
         }
     }
-
   return (
     <Appbar.Header style={{backgroundColor: 'skyblue'}}>
         {previous ? <Appbar.BackAction onPress={navigation.goBack} color='white' /> : null}
@@ -26,8 +28,9 @@ function CustomNavigationBar({ navigation, previous, loggedIn }) {
 
 const mapStateToProps = state => {
     return ({
-        loggedIn: state.users.loggedIn
+        loggedIn: state.loggedIn,
+        id: state.id
     })
 }
 
-export default connect(mapStateToProps)(CustomNavigationBar)
+export default connect(mapStateToProps, {signOut})(CustomNavigationBar)

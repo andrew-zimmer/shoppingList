@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 //reducer
-import Reducers from './src/reducers/index'
+import Users from './src/reducers/Users'
 
 //page navigation
 import {NavigationContainer} from '@react-navigation/native'
@@ -23,9 +23,11 @@ import Header from './src/components/HomePage/Header'
 
 const Stack = createStackNavigator()
 
+const store = createStore(Users, applyMiddleware(thunk))
+
 export default function App() {
 
-  const store = createStore(Reducers, applyMiddleware(thunk))
+
 
   return (
     <Provider store={store}>
